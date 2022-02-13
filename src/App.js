@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import MainPageClass from './routes/MainPageClass.js';
+import ForgetPassword from './routes/ForgetPassword.js';
+import CreateTournamentClass from './routes/CreateTournamentClass.js';
+import ViewTournamentClass from './routes/ViewTournamentClass.js';
+
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
+
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPageClass/>}/>
+        <Route path = "ForgetPass" element = {<ForgetPassword/>}/>
+        <Route path = "CreateTournament" element = {<CreateTournamentClass/>}/>
+        <Route path = "ViewTournament" element = {<ViewTournamentClass/>}>
+        <Route path = ":index" element = {<ViewTournamentClass/>}/>
+          </Route>
+       </Routes>
+        </BrowserRouter>
+
+    );
 }
 
 export default App;
