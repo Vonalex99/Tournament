@@ -6,7 +6,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { Link } from "react-router-dom";
 
 
 import {
@@ -128,8 +127,7 @@ export default function FormDialog(props) {
           />
           <div style={{height: '20px', width: '100%'}}/>
 
-         <Link to = "/ForgetPass">Forgot your Password? Click Here</Link>
-
+        
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleClose} color="primary">

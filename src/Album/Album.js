@@ -1,31 +1,28 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import LoginDialog from './LoginDialog.js'
-import SignUpDialog from './SignUpDialog.js'
-import Header from './Header.js';
-import Copyright from './Copyright.js';
+import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
-
-
-import {useNavigate} from 'react-router-dom';
-
+import Stack from '@mui/material/Stack';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import {
   onAuthStateChanged,
-  signOut,
+  signOut
 } from "firebase/auth";
+import * as React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from "../Firebase/firebase-config";
-import { Link } from "react-router-dom";
+import Copyright from './Copyright.js';
+import Header from './Header.js';
+import LoginDialog from './LoginDialog.js';
+import SignUpDialog from './SignUpDialog.js';
+
+
+
 
 
 
@@ -37,12 +34,12 @@ const logout = async () => {
 
 export default function Album(props) {
 
-  console.log(props.database)
-  
+
  //TO OPEN DE FORM DIALOG
  const [openLogin, setOpenLogin] = React.useState(false);
  const [openSign, setOpenSign] = React.useState(false);
  const [page, setPage] = React.useState(1);
+ const [end, setEnd] = React.useState(9);
 
  const navigate = useNavigate ();
 
@@ -71,6 +68,8 @@ const handleCloseLoginDialog = () => {
 
 const handlePageChange = (event, value) => {
   setPage(value);
+  const end2 = (props.database.length > (page-1)*10+10) ? (page-1)*10+10 : props.database.length -1;
+  setEnd(end2);
 };
 
 const handleCreateBtn = () => {
@@ -127,7 +126,7 @@ const handleCreateBtn = () => {
         <Container sx={{ position: 'relative', py: 8}} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {props.database !== null && props.database.map((item) => (
+            {props.database !== null && props.database.slice((page-1)*(10-page),end).map((item) => (
               <Grid item key={item.id} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}

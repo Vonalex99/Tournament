@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import { Link } from "react-router-dom";
 
 import {signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../Firebase/firebase-config";
@@ -85,6 +86,8 @@ export default function FormDialog(props) {
 
 
         </DialogContent>
+        <Link to = "/ForgetPass">Forgot your Password? Click Here</Link>
+
         <DialogActions>
           <Button onClick={props.handleClose} color="primary">
             Cancel
